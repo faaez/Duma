@@ -2,6 +2,7 @@
 
 from math import fsum
 from operator import itemgetter
+import MySQLdb
 
 print "niaje, this is matches"
 	
@@ -13,6 +14,31 @@ print "niaje, this is matches"
 # matches.append([4, 2 , 2, 4, 2.6])
 
 # print "len = " , len(matches)
+
+# hard code the function arguments for now
+requester_id = 1
+skill_required = 1
+
+db = MySQLdb.connect(host="72.167.233.37",user="dumaremote",
+                    passwd="kaziPap!1",db="dumaremote");
+c = db.cursor()
+c.execute("WITH RECURSIVE transitive_closure(a, b, distance, path_string) AS \
+          ( SELECT a, b, 1 AS distance,\
+           a || '.' || b || '.' AS path_string\
+           FROM edges\
+           \
+           UNION ALL\
+           \
+           SELECT tc.a, e.b, tc.distance + 1,\
+           tc.path_string || e.b || '.' AS path_string\
+           FROM edges AS e\
+           JOIN transitive_closure AS tc\
+           ON e.a = tc.b\
+           WHERE tc.path_string NOT LIKE '%' || e.b || '.%'\
+           )\
+          SELECT * FROM transitive_closure\
+          ORDER BY a, b, distance;")
+c.fetchall()
 
 matches_ids = [2, 3, 5, 6, 4] # nodes connected to source node
 distances = [1, 1, 1, 1, 2]
