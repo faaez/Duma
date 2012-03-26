@@ -5,17 +5,8 @@ from operator import itemgetter
 import MySQLdb
 
 print "niaje, this is matches"
-	
-# matches = []
-# matches.append([2, 1 , 0, 5, 3.7])
-# matches.append([3, 1 , 0, 3, 3.8])
-# matches.append([5, 1 , 3, 2, 2.9])
-# matches.append([6, 1 , 1, 3, 1.5])
-# matches.append([4, 2 , 2, 4, 2.6])
 
-# print "len = " , len(matches)
-
-# hard code the function arguments for now
+# hard code the function arguments for now - CHANGE!!!
 requester_id = 1
 skill_required = 1
 
@@ -66,8 +57,8 @@ def find_friends_with_skills(user_id, skill_id):
         nextfriends = []
         
 def main():
-    #hard-code user_id and skill_id for now - CHANGE!!!
-    find_friends_with_skills(1, 1)
+    #these variables are hard-coded at the top - change asap!!
+    find_friends_with_skills(requester_id, skill_required)
 
     len = len (matches_ids)
     sum_dist = fsum(distances)
